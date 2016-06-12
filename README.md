@@ -43,7 +43,42 @@ One more thing I'd expect from a secure Wi-Fi protocol is to make "open" Wi-Fi n
 Silly "terms of service" in your cafe can break your applications and expose you to risk
 ---
 
-OK, how could we fix things?
+Ever seen this "please accept terms of service" or a login screen when trying to open a website after connecting to a Wi-Fi network? Or even worse, did you ever get this "this connection is not trusted" screen, clicked "continue anyway" and see this kind of "welcome" website? Well, this is what terrible engineering looks like when there are no proper tools to solve a problem. Back in the time when Wi-Fi was invented, nobody thought that the network would have any need to contact you regarding terms of service or anything like this. Because of that, engineers decided that it's a good idea to capture the user's traffic and send him a note. Some of the Access Points will even try to perform the Man-In-The-Middle (MITM) attack to make you see this screen if you're trying to visit an encrypted website. From the psychological aspect of security, this is completely unacceptable: if you're making users used to the fact that an access point can modify the displayed website, he's losing one of the ways to tell whether he's under attack. The attacker can have an easier way to perform <a href="https://en.wikipedia.org/wiki/Social_engineering">social engineering</a> on a target, which obviously is bad.
+
+**How could this be solved?** Introduce a way for APs to send messages to the user and let them know that without the acceptable of terms of service, he can't browse the internet. The same channel could be used to notify the user that the network is under attack. I expect that this will also be abused by people trying to smuggle advertisements over this channel, so the user should have a way to mute those notifications on a per-network basis.
+
+What else?
+---
+
+I don't really know **all** of WPA2 features and I'm pretty sure that there are more things that are broken about WPA2 that could be fixed. If you know any, I invite you to open a pull request on Github and let me know about it.
+
+OK, how could we fix things for everyone?
 ===
 
-**TODO:** write this part.
+Option one: getting Wi-Fi alliance to fix their protocol
+---
+
+I believe that the first step should be to list the things that are broken about WPA2 and ask <a href="https://wi-fi.org">Wi-Fi alliance</a> to fix those. Here's what they told me when I contacted them:
+
+> Thank you for contacting Wi-Fi Alliance.
+> 
+> In regards to your question about work on security developments, there is a member task group that is working to advance Wi-Fi security enhancements. You can find all the current work groups on the Wi-Fi Alliance website at http://www.wi-fi.org/who-we-are/current-work-areas.
+> 
+> In order to participate in discussion and work groups, companies must become a member of Wi-Fi Alliance.
+> 
+> Best Regards,
+> Wi-Fi Alliance Staff
+> ref:_00D407XSp._50033vj08w:ref
+
+Option two: hack up unofficial WPA3 without the help of Wi-Fi alliance
+---
+
+Free Software community has a wide range of networking software that enables manipulation of Wi-Fi traffic. While some of it can be used for nefarious purposes, we could as well use it to sketch up a prototype of WPA3 and push for it to get adopted. If you're interested, I encourage you to contact the discussion boards for projects related to Wi-Fi manipulation and see if they're interested in this. Some of the projects that are related include: ScaPy, WPA supplicant, OpenWRT. There's definitely more of them so if you know them, let me know!
+
+Final notes
+===
+
+I release this document under the WTFPL license and encourage everyone to edit this document and participate in the discussion about it. In order to change anything in this document, click <a href="https://github.com/d33tah/call-for-wpa3/edit/master/README.md">here</a>.
+
+Signed,
+Jacek "d33tah" Wielemborek
