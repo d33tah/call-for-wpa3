@@ -16,7 +16,7 @@ Anyone can disconnect you
 
 Here's a fun fact: if I'm within the range of your network, I can kick you out of it. I don't need a password or any special equipment: pretty much any average laptop with a tiny program installed is going to let me send a so-called DEAUTH packet to your AP and say something like "hey, just kick this person out of the network". If you're under this attack, which is called <a href="https://en.wikipedia.org/wiki/Wi-Fi_deauthentication_attack">DEAUTH attack</a>, it's going to look for you as if your network connection was weak or broken. You will be able to connect back and the attacker can then send the annoying signal again and again as much as he wants. There are no safeguards as of today (at least none that I know of) and since one can do it without sending a lot of information into the network, it's not trivial to detect and block the source of the disruption. Another fun fact: some hotels will try to do this kind of attack on you if you're not using their wireless network, just to force you to pay.
 
-**How could this be solved?** That's pretty simple: don't accept DEAUTH packets from strangers. As long as one can't prove that he's a member of the network, he shouldn't be able to disconnect from it. After all, no session is established yet, so the command wouldn't really make much sense.
+**How could this be solved?** That's pretty simple: don't accept DEAUTH packets from strangers. As long as one can't prove that he's a member of the network, he shouldn't be able to disconnect from it. After all, no session is established yet, so the command wouldn't really make much sense.  This is also known as [802.11w](https://en.wikipedia.org/wiki/IEEE_802.11w-2009).
 
 The password can be cracked offline
 ---
