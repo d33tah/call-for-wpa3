@@ -1,3 +1,42 @@
+Agree
+===
+
+I agree there needs to be a change.  I remember many many years ago when I would test my wireless network with WEP encryption and it would take hours and hours to finally get the key.  Years later it took less than 3 minutes.  WPA/WPA2 came out and the hardware that existed used to only get 100-300 Keys tested per second which every "tester" knew could take forever.  Rainbow tables showed up and since wireless networks were still considered "new" to most individuals they really didn't know how to secure it.  They would leave the names of the network the same and choose easy passwords.  Well with rainbow tables this made it simple, same network name = search top passwords in seconds.  Many networks were talked about being accessed in security forums.  These days with GPU's, WPA/2 has become easier to "test".  Gamers buy 2-4 graphics cards all the time building their massive gaming rigs.  The latest GTX 1080 can do almost 400 kH/s, now imaging 4 of those or like many Hashcat enthusiasts they put 8 of them in there.
+
+My Attempt
+===
+Years ago I created a twitter account just to contact the WIFI ALLIANCE and give them my suggestion.  I wrote it on stack exchange and linked it in the twitter comment.  I also tried to email them.  I got a response and basically it was pay the membership fee.
+
+My Idea years ago
+===
+I'd like to start off saying that I am in no way a securty expert and if a security expert can prove this as a waste of time, then please do. Also if any of this is wrong please correct it, its been a while since I had this thought and wrote it again.
+
+*Current Formula*
+Key = PBKDF2(HMAC−SHA1, passphrase, ssid, 4096, 256)
+
+The formula takes the passphrase and the network name(SSID) and iterates it 4096 times with HMAC-SHA1 to get the 256bit key.  As you can see the only unique part of the formula would be the SSID (besides what were looking for...the password).  This is how Rainbow tables could be created for the most common SSID's.  "Testers" worked on them for years.  These days the semi-tech knows to change this to something unique, but there are still MANY that I see on my phone (when it searches for hotspots) that are the same basic manufacture ones.
+
+I read a basic way that it works with the 4 way handshake.  The client sends a message to the Router saying I want to connect.  The router then sends a random message that is encrypted with the KEY.  The client then repeats that message back so the router knows you have the key and then the router allows the connections *Probably really dumbing this down and may have forgot something, but basic principle.*  Now one thing not mentioned here is that both the client and the Router have been sending very important information which includes the mac addresses of each other.
+
+*My Formula*
+--first part--
+Key = PBKDF2(HMAC−SHA256/3, passphrase (at least 14 characters) + Router Mac, ssid + router mac, 100,000, 256)
+
+The formula above increases the iterations (can be modified as hardware allows).  It also makes rainbow tables almost useless by adding the Routers unique mac address to the formula with the passphrase and the ssid. It also wants a passphrase that is 14 characters in length and changes the HMAC to SHA2/3
+
+--Second Part--
+Key = PBKDF2(HMAC−SHA256/3, passphrase (at least 14 characters) + Router Mac, ssid + router mac + client mac, ITERATIONS, 256)
+
+Once the client has proven that it knows the password with the first formula (or even from the start), the router will reply with a random number between lets say 10000- 25000 (can be modified as hardware allows).  THe client will then fill this number in and reply back to the router showing again that it has the password and understands that now it will use the new number of iterations.    
+
+This can expire over time/set time/never.  If the router gets reset/client, then when the client attempts to connect, it will default to the original formula and start the process over.  
+
+--Thoughts---
+
+Just using the first formula makes it harder for "testers".  Implementing the second one could make it even harder for someone to "test" the router, not knowing what iterations are needed for the formula.
+
+There's alot more ideas, but putting them into practice would be complicated i'm sure.  One idea is to have the router/client incorporate an actual chip/hardware that saves a table of clients and save another secret random passphrase that was established after a successfull first connection.  From that moment on the responses would end/begin with that random data to show its coming from the original client, not a spoofed mac.  This table would exist even if the firmware was updated/etc.  If it was lost/reset the user could reconnect the clients kinda like WPS/bluetooth with a verification that it is the client.  The router would ignore all other attempts by the mac address that didn't have the random data..so if an attacker wanted to send a dEAUTH command the router would ignore it unless it came from the client who is sending the proper data.  Again this could be looked at/tinkered with.
+
 Call for WPA3 - what's wrong with WPA2 security and how to fix it
 ===
 
@@ -86,3 +125,4 @@ I release this document under the WTFPL license and encourage everyone to edit t
 
 Signed,
 Jacek "d33tah" Wielemborek
+
