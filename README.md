@@ -11,7 +11,7 @@ WPA2 is the latest network protocol that is supposed to secure your network conn
 What's wrong with WPA2?
 ===
 
-WPA2 is fundamentally broken with KRAK
+WPA2 is fundamentally broken with KRACK
 ---
 
 They are several vulnerabilities in the Wi-Fi Protected Access II protocol that make it possible for attackers to eavesdrop Wi-Fi traffic passing between computers and access points.
